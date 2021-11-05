@@ -1,15 +1,7 @@
-{-# LANGUAGE TypeApplications #-}
-
 import Test.Framework (defaultMain, testGroup)
 import Test.Framework.Providers.QuickCheck2 (testProperty)
 
 import Abstracts
-    ( readApplicative,
-      readCompose,
-      readComposeTwoAct,
-      readLexScope,
-      readRightAssoc,
-      readSemigroup )
 
 main :: IO ()
 main = defaultMain tests

@@ -8,6 +8,8 @@ module Abstracts (
   , readRightAssoc
   , readComposeTwoAct
   , readLexScope
+  , readSeqApp
+  , readSeqApp2
 ) where
 
 -- | Application composition
@@ -62,42 +64,22 @@ readComposeTwoAct = pure (Just 1) 0 >> return "Doing well"
 -- | Arrow left a.ka. Lexical Scope
 (*|) :: Monad m => (t -> m b) -> m t -> m b
 (*|) ƒ1 ƒ2 = do
-  a <- ƒ2 
+  a <- ƒ2
   ƒ1 a
-  
+
 readLexScope :: [Integer]
 readLexScope = (*|) pure . reverse $ map (* 2) [1, 2, 3]
 
--- readLexScope = show . showDoAct (map (\x -> x * 2))
+-- | Sequential application
+-- Sekuensial: sederetan instruksi atau aksi yang akan di eksekusi 
+-- A few functors support an implementation of <*> 
+-- that is more efficient than the default one.
+-- do f <- fs
+   -- a <- as
+   -- pure (f a)
+-- f (a -> b) -> f a -> f b
+readSeqApp :: ([Char], Integer)
+readSeqApp = ("hello ", (+ 15)) <*> ("world!", 2002)
 
--- go = map (\x -> x) [2, 3]
-
--- arrow' :: (Show a , Num a) => [a] -> [Char]
--- arrow' [] = []
--- arrow' xs = do
---   days <- map (* 2) xs
---   daysR <- reverse xs
---   show [days, daysR]
--- >>= = do a <- as
---        bs a
-
--- fo x y = pure 2
-
--- readFo = fo [2, 3] [2, 3]
-
--- arrowNext' fs as = do
---   f <- fs
---   f <$> as
-
--- showApplFunctor = pure
--- showApplFunctor fs as = do
---     f <- fs
---     f <$> as
-
--- print $ readSemigroup "Short"
--- print showApplFunctor
--- print $ arrow' [2, 3]
--- print . show $ "12" >> readFo
--- print . show $ arrow' [2, 3]
--- putStrLn "Hello What is your name?"
---         >> getLine >>= \name -> putStr ("Hello" ++ name ++ "!")
+readSeqApp2 :: [Char]
+readSeqApp2 = (++) <*> const "Right" $ "Left"
