@@ -83,3 +83,7 @@ readSeqApp = ("hello ", (+ 15)) <*> ("world!", 2002)
 
 readSeqApp2 :: [Char]
 readSeqApp2 = (++) <*> const "Right" $ "Left"
+
+-- TODO
+-- | Combine all operators!
+--

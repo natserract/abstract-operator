@@ -50,6 +50,7 @@ function rightAssoc<
 type FSequence<T> = (x: T, y: T) => T;
 type Sequence<T> = (x: T) => T;
 
+// | From: <*>
 // Use: seq((x, y) => x + y, (_) => "Right", "Left")
 // Output: "LeftRight"
 function seq<T>(fa: FSequence<T>, fb: Sequence<T>, val: T) {
