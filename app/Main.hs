@@ -1,5 +1,11 @@
 module Main where
 import Abstracts
+    ( readApplicative,
+      readCompose,
+      readComposeTwoAct,
+      readLexScope,
+      readRightAssoc,
+      readSemigroup )
 
 main :: IO ()
 main = do
