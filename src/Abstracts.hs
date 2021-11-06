@@ -1,15 +1,15 @@
 -- common abstract operator in haskell
 
 module Abstracts
-  ( readCompose,
-    readApplicative,
-    readSemigroup,
-    readRightAssoc,
-    readComposeTwoAct,
-    readLexScope,
-    readSeqApp,
-    readSeqApp2,
-    readCombineAlls,
+  (  readCompose
+   , readApplicative
+   , readSemigroup
+   , readRightAssoc
+   , readComposeTwoAct
+   , readLexScope
+   , readSeqApp
+   , readSeqApp2
+   , readCombineAlls
   )
 where
 
@@ -27,6 +27,7 @@ readCompose = show $ [1, 2, 3, 4]
 -- Functor f => (a -> b) -> f a -> f b
 -- Functor: Passing value to function parameter
 -- Array merupakan turunan dari sebuah functor
+-- See: https://en.wikibooks.org/wiki/Haskell/Applicative_functors#Functors
 readApplicative :: [String]
 readApplicative = show . (* 2) <$> [1, 2, 3, 4]
 
@@ -89,7 +90,7 @@ readSeqApp2 :: [Char]
 readSeqApp2 = (++) <*> const "Right" $ "Left"
 
 -- | Combine all operators!
--- You can do this with more little bit code, 
+-- You can do this with more little bit code,
 -- But my point here, just implement all {abstract} operator in one operation
 readCombineAlls :: IO ()
 readCombineAlls = do
@@ -98,17 +99,17 @@ readCombineAlls = do
   input <- getLine
 
   let lenIds = length . words $ input
-  let pureStr' = fromMaybe lenWords $ 
+  let pureStr' = fromMaybe lenWords $
         case length lenWords of
           0 -> Just . words $ "Nothing"
           _ -> Just <$> map (<> " Haskell!, ") $ lenWords
-        where lenWords = words input 
-  
+        where
+          lenWords = words input
+
   case lenIds of
-       2 -> putStrLn $ pureStr' >>= show
-       0 -> error "Empty words!"
-       _ -> error "Must have 2 words"
+    2 -> putStrLn $ pureStr' >>= show
+    0 -> error "Empty words!"
+    _ -> error "Must have 2 words"
 
-
--- -- -- -- -- -- -- 
--- -- -- -- -- -- -- 
+-- -- -- -- -- -- --
+-- -- -- -- -- -- --

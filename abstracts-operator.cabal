@@ -62,4 +62,5 @@ test-suite abstracts-operator-test
     ,  text
     , test-framework
     , test-framework-quickcheck2
+    , QuickCheck
   default-language: Haskell2010
