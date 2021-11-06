@@ -11,3 +11,4 @@ main = do
   print readLexScope
   print readSeqApp
   print readSeqApp2
+  readCombineAlls

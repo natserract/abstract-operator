@@ -1,16 +1,20 @@
 -- common abstract operator in haskell
-{-# LANGUAGE FlexibleContexts #-}
 
-module Abstracts (
-    readCompose
-  , readApplicative
-  , readSemigroup
-  , readRightAssoc
-  , readComposeTwoAct
-  , readLexScope
-  , readSeqApp
-  , readSeqApp2
-) where
+module Abstracts
+  ( readCompose,
+    readApplicative,
+    readSemigroup,
+    readRightAssoc,
+    readComposeTwoAct,
+    readLexScope,
+    readSeqApp,
+    readSeqApp2,
+    readCombineAlls,
+  )
+where
+
+import Data.Maybe (fromMaybe)
+import GHC.IO.Exception hiding (IOErrorType (PermissionDenied))
 
 -- | Application composition
 -- ($)  :: (a -> b) ->  a -> b
@@ -71,12 +75,12 @@ readLexScope :: [Integer]
 readLexScope = (*|) pure . reverse $ map (* 2) [1, 2, 3]
 
 -- | Sequential application
--- Sekuensial: sederetan instruksi atau aksi yang akan di eksekusi 
--- A few functors support an implementation of <*> 
+-- Sekuensial: sederetan instruksi atau aksi yang akan di eksekusi
+-- A few functors support an implementation of <*>
 -- that is more efficient than the default one.
 -- do f <- fs
-   -- a <- as
-   -- pure (f a)
+-- a <- as
+-- pure (f a)
 -- f (a -> b) -> f a -> f b
 readSeqApp :: ([Char], Integer)
 readSeqApp = ("hello ", (+ 15)) <*> ("world!", 2002)
@@ -85,5 +89,22 @@ readSeqApp2 :: [Char]
 readSeqApp2 = (++) <*> const "Right" $ "Left"
 
 -- TODO
+
 -- | Combine all operators!
---
+readCombineAlls :: IO ()
+readCombineAlls = do
+  putStrLn "-----------"
+  putStrLn "Say 2 words please!: "
+  inpStr <- getLine
+
+  let lenStrIdx = length . words $ inpStr
+  let check = fromMaybe lenWords $ 
+        case length lenWords of
+          0 -> Just . words $ "Nothing"
+          _ -> Just <$> map (<> " Haskell!, ") $ lenWords
+        where lenWords = words inpStr 
+  
+  case lenStrIdx of
+       2 -> putStrLn $ check >>= show
+       0 -> error "Empty words!"
+       _ -> error "Must have 2 words"
