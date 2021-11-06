@@ -88,23 +88,27 @@ readSeqApp = ("hello ", (+ 15)) <*> ("world!", 2002)
 readSeqApp2 :: [Char]
 readSeqApp2 = (++) <*> const "Right" $ "Left"
 
--- TODO
-
 -- | Combine all operators!
+-- You can do this with more little bit code, 
+-- But my point here, just implement all {abstract} operator in one operation
 readCombineAlls :: IO ()
 readCombineAlls = do
   putStrLn "-----------"
   putStrLn "Say 2 words please!: "
-  inpStr <- getLine
+  input <- getLine
 
-  let lenStrIdx = length . words $ inpStr
-  let check = fromMaybe lenWords $ 
+  let lenIds = length . words $ input
+  let pureStr' = fromMaybe lenWords $ 
         case length lenWords of
           0 -> Just . words $ "Nothing"
           _ -> Just <$> map (<> " Haskell!, ") $ lenWords
-        where lenWords = words inpStr 
+        where lenWords = words input 
   
-  case lenStrIdx of
-       2 -> putStrLn $ check >>= show
+  case lenIds of
+       2 -> putStrLn $ pureStr' >>= show
        0 -> error "Empty words!"
        _ -> error "Must have 2 words"
+
+
+-- -- -- -- -- -- -- 
+-- -- -- -- -- -- -- 
