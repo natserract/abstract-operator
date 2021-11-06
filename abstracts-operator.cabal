@@ -8,9 +8,9 @@ cabal-version: 1.12
 
 name:           abstracts-operator
 version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/githubuser/abstracts-operator#readme>
-homepage:       https://github.com/githubuser/abstracts-operator#readme
-bug-reports:    https://github.com/githubuser/abstracts-operator/issues
+description:    Please see the README on GitHub at <https://github.com/natserract/abstract-operator#readme>
+homepage:       https://github.com/natserract/abstract-operator#readme
+bug-reports:    https://github.com/natserract/abstract-operator/issues
 author:         Author name here
 maintainer:     example@example.com
 copyright:      2021 Author name here
@@ -23,7 +23,7 @@ extra-source-files:
 
 source-repository head
   type: git
-  location: https://github.com/githubuser/abstracts-operator
+  location: https://github.com/natserract/abstract-operator
 
 library
   exposed-modules:
@@ -59,7 +59,7 @@ test-suite abstracts-operator-test
   build-depends:
       abstracts-operator
     , base >=4.7 && <5
-    ,  text
+    , text
     , test-framework
     , test-framework-quickcheck2
     , QuickCheck

@@ -23,7 +23,6 @@ tests = [
 expect :: Eq a => a -> a -> Bool
 expect f e = f == e
 
-
 str :: [Char] -> [Char]
 str s = "Return from " ++ s ++ " function"
 
